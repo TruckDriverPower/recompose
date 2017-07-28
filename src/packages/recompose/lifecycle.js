@@ -23,7 +23,10 @@ const lifecycle = spec => BaseComponent => {
     }
   }
 
-  Object.keys(spec).forEach(hook => (Lifecycle.prototype[hook] = spec[hook]))
+  Object.keys(spec).forEach(hook => {
+    Lifecycle.prototype[hook] = spec[hook]
+    return 0
+  })
 
   if (process.env.NODE_ENV !== 'production') {
     return setDisplayName(wrapDisplayName(BaseComponent, 'lifecycle'))(
